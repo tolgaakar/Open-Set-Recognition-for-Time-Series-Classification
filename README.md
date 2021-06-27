@@ -29,7 +29,7 @@ $python OpenSetROCKET_GridSearch.py ArticularyWordRecognition
 ```
 
 
-Step 3: Test the OS-ROCKET model with the given unknown datasets
+Step 3: Test the OS-ROCKET model with the given thresholds and unknown datasets as arguments
 ```
 $python OpenSetROCKET_Test.py ArticularyWordRecognition 2.75 3.25 PEMS-SF SpokenArabicDigits
 ```
