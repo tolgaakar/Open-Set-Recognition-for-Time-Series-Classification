@@ -1,4 +1,4 @@
-# OS-ROCKET: Open Set Recognition for Time Series Classification
+# Open Set Recognition for Time Series Classification
 
 This repository contains the first generic open set model for time series classification developed by me as part of my master thesis for the University of Hildesheim. The proposed method is applicable to multiple datasets, and can work with any classifier. In this case, the ROCKET[[1]](#1) and InceptionTime[[2]](#2) are used as the classifiers. Class-specific time series barycenters are used to achieve unknown detection, by looking at the Euclidean DTW (dynamic time warping) distance and the cross-correlation between the barycenters and an input. Experimental results indicate that the proposed method achieves near-perfect unknown detection results (with a recall of over 90%) by trading off some of its closed set classification accuracy on the UEA multivariate time series archive with 30 datasets. 
 
