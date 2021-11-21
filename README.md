@@ -25,15 +25,25 @@ $python barycenters_and_augmentation.py ArticularyWordRecognition
 ```
 
 
-Step 2: Run OpenSetROCKET_GridSearch.py to train the classifier, as well as to get the optimal threshold values for the unknown detector for the given dataset
+Step 2: Train the open set classifier of your choice. They will output threshold values (hyper-parameters for their respective open set methods) for the unknown detector for the given dataset.
+E.g:
 ```
-$python OpenSetROCKET_GridSearch.py ArticularyWordRecognition
+$python OpenSetInceptionTime_Train.py ArticularyWordRecognition
 ```
 
 
-Step 3: Test the OS-ROCKET model with the given thresholds and unknown datasets as arguments
+Step 3: Test the open set model with the given thresholds and unknown datasets as arguments.
+E.g.:
 ```
+$python OpenMax_InTime_Test.py ArticularyWordRecognition 6 PEMS-SF SpokenArabicDigits
+
+$python OvA_CNNs_Test.py ArticularyWordRecognition PEMS-SF SpokenArabicDigits
+
+$python LCVAE_Test.py ArticularyWordRecognition 510 PEMS-SF SpokenArabicDigits (has to be run with tf 2.4.1)
+
 $python OpenSetROCKET_Test.py ArticularyWordRecognition 2.75 3.25 PEMS-SF SpokenArabicDigits
+
+$python OpenSet_InceptionTime_Test.py ArticularyWordRecognition 2.75 3.25 PEMS-SF SpokenArabicDigits
 ```
 
 ## Overall Performance
