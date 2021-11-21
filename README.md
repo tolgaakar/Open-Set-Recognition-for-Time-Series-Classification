@@ -4,15 +4,15 @@ This repository contains the first generic open set model for time series classi
 
 You can find the details of this work in the [OSCforTSC_Paper.pdf](https://github.com/tolgaakar/Open-Set-Recognition-for-Time-Series-Classification/blob/main/OSRforTSC_Paper.pdf) file. 
 
-![OS ROCKET Diagram](https://github.com/tolgaakar/OS-ROCKET-Open-Set-Recognition-for-Time-Series-Classification/blob/main/OSRocketDiagram.png?raw=true)
 
-### How to run
 Prerequisites: Install the sktime and tslearn libraries and download the UEA archive
 ```
-$pip install sktime
-$pip install numba
-$pip install tslearn
+$pip install tensorflow==2.7.0
+$pip install sktime==0.5.3
+$pip install numba==0.51.2
+$pip install tslearn==0.5.2
 ```
+PS: For the LCVAE ipmlementation tensorflow==2.4.1 is required
 
 ```
 $wget http://www.timeseriesclassification.com/Downloads/Archives/Multivariate2018_ts.zip
