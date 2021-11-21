@@ -1,6 +1,6 @@
 # OS-ROCKET: Open Set Recognition for Time Series Classification
 
-This repository contains the first generic open set model for time series classification, OS-ROCKET, developed by me as part of my master thesis for the University of Hildesheim. OS-ROCKET is applicable to multiple datasets, and can work with any classifier. In this case, the ROCKET[[1]](#1) is used as the classifier. Class-specific time series barycenters are used to achieve unknown detection, by looking at the Euclidean DTW (dynamic time warping) distance and the cross-correlation between the barycenters and an input. Experimental results indicate that the proposed method achieves near-perfect unknown detection results (with a recall of 0.93) by trading off some of its closed set classification accuracy (around 0.12 less) on the UEA multivariate time series archive with 30 datasets. 
+This repository contains the first generic open set model for time series classification developed by me as part of my master thesis for the University of Hildesheim. The proposed method is applicable to multiple datasets, and can work with any classifier. In this case, the ROCKET[[1]](#1) and InceptionTime[[2]](#2) are used as the classifiers. Class-specific time series barycenters are used to achieve unknown detection, by looking at the Euclidean DTW (dynamic time warping) distance and the cross-correlation between the barycenters and an input. Experimental results indicate that the proposed method achieves near-perfect unknown detection results (with a recall of over 90%) by trading off some of its closed set classification accuracy on the UEA multivariate time series archive with 30 datasets. 
 
 ![OS ROCKET Diagram](https://github.com/tolgaakar/OS-ROCKET-Open-Set-Recognition-for-Time-Series-Classification/blob/main/OSRocketDiagram.png?raw=true)
 
@@ -34,6 +34,20 @@ Step 3: Test the OS-ROCKET model with the given thresholds and unknown datasets 
 $python OpenSetROCKET_Test.py ArticularyWordRecognition 2.75 3.25 PEMS-SF SpokenArabicDigits
 ```
 
+## Overall Performance
+
+| Method  | Closed Set Clasification Accuracy | Recall for the Unknowns | Open Set Macro F1 Score |
+| ------------- | ------------- | ------------- | ------------- |
+| OvA-CNNs | **0.627** | 0.247 | 0.500 |
+| OpenMax InceptionTime | 0.440 | 0.832 | 0.515 |
+| LCVAE | 0.481  | 0.663| 0.463 |
+| Open Set ROCKET | 0.594 | **0.901** | **0.640** |
+| Open Set InceptionTime  | 0.590 | **0.901** | **0.660** |
+
+
 ## References
 <a id="1">[1]</a> 
 Dempster,   A.,   Petitjean,   F.,   and  Webb,   G.  I. (2020).   Rocket:   exceptionally  fast  and  accurate  time  series  classification  using  random  convolutional  kernels. Data  Mining  and  Knowledge Discovery, 34(5):1454–1495.
+
+<a id="2">[2]</a> 
+Fawaz, H.I., Lucas, B., Forestier, G., Pelletier, C., Schmidt, D.F., Weber, J., Webb,G.I., Idoumghar, L., Muller, P.A., Petitjean, F.: Inceptiontime: Finding alexnet fortime series classification. Data Mining and Knowledge Discovery34(6), 1936–1962(2020)
