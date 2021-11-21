@@ -43,7 +43,7 @@ warnings.filterwarnings("ignore")
 # Paths should be defined here
 DATA_PATH = 'Multivariate_ts'
 AUG_PATH = 'augmented'
-MODELS_PATH = '/content/drive/MyDrive/Master Thesis/Models/OM-IT'
+MODELS_PATH = '/content/drive/MyDrive/Master Thesis/Models/OS-IT'
 BC_PATH = 'barycenters'
 dataset = sys.argv[1]
 
@@ -89,12 +89,9 @@ y_train = y_train[sorted_idxs]
 
 # Mask NaN values
 
-mask_value = -10   # NaN values will be masked for a constant length
-
-x_train_masked = x_train.copy()
-x_test_masked = x_test.copy()
-x_train_masked[np.isnan(x_train_masked)] = mask_value
-x_test_masked[np.isnan(x_test_masked)] = mask_value
+mask_value = 0
+x_train[np.isnan(x_train)] = mask_value
+x_test[np.isnan(x_test)] = mask_value
 
 
 def inception_module(input_tensor, stride=1, activation='linear', bottleneck_size=32, kernel_size=40, nb_filters=32):
@@ -236,8 +233,8 @@ for i in range(num_ensembles):
     models.append(model)
     callbacks.append(callbacks_)
 
-val_data = (x_test_masked, to_categorical(y_test))
-inception_ensemble = InceptionTime_Ensemble(models, callbacks, x_train_masked, to_categorical(y_train), n_epochs, batch_size, val_data)
+val_data = (x_test, to_categorical(y_test))
+inception_ensemble = InceptionTime_Ensemble(models, callbacks, x_train, to_categorical(y_train), n_epochs, batch_size, val_data)
 
 # Load model weights
 folder_path = os.path.join(MODELS_PATH, f'{dataset}')
@@ -245,7 +242,7 @@ inception_ensemble.load_weights(folder_path)
 
 # Testing on the known samples
 
-preds_test = inception_ensemble.predict(x_test_masked)
+preds_test = inception_ensemble.predict(x_test)
 print(f'InceptionTime classification report for the test set of the {dataset} dataset')
 print(classification_report(y_test, np.argmax(preds_test, axis=1)))
 cm=confusion_matrix(y_test, np.argmax(preds_test, axis=1))
@@ -361,7 +358,7 @@ def modify_preds(x, bc_list, preds):
     return preds
 
 # Results for the known dataset
-preds = np.argmax(inception_ensemble.predict(x_test_masked), axis=1)
+preds = np.argmax(inception_ensemble.predict(x_test), axis=1)
 modified_preds = modify_preds(x_test, bc_list, preds.copy())
 print('Open Set Model Classification Report')
 print(classification_report(y_test, modified_preds))
